@@ -3,12 +3,17 @@
 import { ClientSideSuspense, RoomProvider } from "@liveblocks/react";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
+import { Editor } from "./editor/Editor";
 import Header from "./Header";
 import React from "react";
 
-const CollaborativeRoom = () => {
+type Props = {
+  roomId: string;
+};
+
+const CollaborativeRoom = ({ roomId }: Props) => {
   return (
-    <RoomProvider id="my-room">
+    <RoomProvider id={roomId}>
       <ClientSideSuspense fallback={<div>Loading…</div>}>
         <div className="collaborative-room">
           <Header className="text-white">
@@ -22,6 +27,7 @@ const CollaborativeRoom = () => {
               <UserButton />
             </SignedIn>
           </Header>
+          <Editor />
         </div>
       </ClientSideSuspense>
     </RoomProvider>
